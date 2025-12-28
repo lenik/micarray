@@ -1,0 +1,52 @@
+#!/bin/bash
+
+set -e
+
+case "$1" in
+    configure)
+        # Create log directory
+        mkdir -p /var/log
+        
+        # Create example configuration if it doesn't exist
+        if [ ! -f /etc/micarray.conf ]; then
+            cat > /etc/micarray.conf << 'EOF'
+# libmicarray configuration file
+
+[General]
+log_level = "INFO"
+
+[MicrophoneArray]
+num_microphones = 8
+mic_spacing = 15mm
+i2s_bus = 1
+dma_buffer_size = 1024
+sample_rate = 16000
+
+[NoiseReduction]
+enable = true
+noise_threshold = 0.05
+algorithm = "spectral_subtraction"
+
+[AudioOutput]
+output_device = "default"
+volume = 0.8
+
+[Logging]
+enable_serial_logging = true
+log_file = "/var/log/micarray.log"
+EOF
+        fi
+        
+        # Set proper permissions
+        chmod 644 /etc/micarray.conf
+        
+        # Add user to audio group if not already there
+        if ! groups "$SUDO_USER" | grep -q audio; then
+            usermod -a -G audio "$SUDO_USER" 2>/dev/null || true
+        fi
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

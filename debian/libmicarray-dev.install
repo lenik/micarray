@@ -1,0 +1,2 @@
+src/libmicarray.h usr/include
+lib/libmicarray.a usr/lib

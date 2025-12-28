@@ -1,0 +1,14 @@
+libmicarray (1.0.0-1) unstable; urgency=medium
+
+  * Initial release of libmicarray
+  * Multi-microphone array processing for Raspberry Pi
+  * Real-time noise reduction using spectral subtraction
+  * 3D sound localization with time-of-arrival differences
+  * DMA-optimized data transfer for low CPU usage
+  * ALSA-based stereo audio output with spatial positioning
+  * Serial port and file logging capabilities
+  * Comprehensive configuration system
+  * Command-line interface with daemon mode
+  * Complete test suite
+
+ -- libmicarray Team <maintainer@example.com>  Sat, 28 Dec 2024 23:33:00 +0800

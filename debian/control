@@ -1,0 +1,42 @@
+Source: libmicarray
+Section: libs
+Priority: optional
+Maintainer: libmicarray Team <maintainer@example.com>
+Build-Depends: debhelper-compat (= 13),
+               build-essential,
+               libasound2-dev,
+               libfftw3-dev,
+               pkg-config
+Standards-Version: 4.6.0
+Homepage: https://github.com/example/libmicarray
+Vcs-Git: https://github.com/example/libmicarray.git
+Vcs-Browser: https://github.com/example/libmicarray
+
+Package: libmicarray1
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Multi-microphone array processing library
+ libmicarray is a C/C++ library designed for Raspberry Pi to handle
+ multiple microphone arrays for stereo localization and noise reduction.
+ .
+ This package contains the shared library.
+
+Package: libmicarray-dev
+Section: libdevel
+Architecture: any
+Depends: libmicarray1 (= ${binary:Version}), ${misc:Depends}
+Description: Development files for libmicarray
+ libmicarray is a C/C++ library designed for Raspberry Pi to handle
+ multiple microphone arrays for stereo localization and noise reduction.
+ .
+ This package contains the development files (headers and static library).
+
+Package: libmicarray-tools
+Architecture: any
+Depends: libmicarray1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: Command-line tools for libmicarray
+ libmicarray is a C/C++ library designed for Raspberry Pi to handle
+ multiple microphone arrays for stereo localization and noise reduction.
+ .
+ This package contains the command-line application for running the
+ microphone array processing system.
