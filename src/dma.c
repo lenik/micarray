@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "dma.h"
 #include <stdio.h>
 #include <stdlib.h>

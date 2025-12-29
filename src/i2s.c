@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "i2s.h"
 #include <stdio.h>
 #include <stdlib.h>

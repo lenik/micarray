@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "libmicarray.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,6 +6,8 @@
 #include <signal.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 static volatile bool g_running = true;
 static micarray_context_t *g_micarray_ctx = NULL;

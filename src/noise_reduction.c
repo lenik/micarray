@@ -1,7 +1,9 @@
+#define _GNU_SOURCE
 #include "noise_reduction.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include <fftw3.h>
 
@@ -37,8 +39,10 @@ static void apply_hanning_window(float *data, int size) {
 
 static void spectral_subtraction(noise_reduction_context_t *ctx, fftwf_complex *spectrum, int size) {
     for (int i = 0; i < size / 2 + 1; i++) {
-        float magnitude = sqrtf(spectrum[i][0] * spectrum[i][0] + spectrum[i][1] * spectrum[i][1]);
-        float phase = atan2f(spectrum[i][1], spectrum[i][0]);
+        float real = ((float*)spectrum)[2*i];
+        float imag = ((float*)spectrum)[2*i + 1];
+        float magnitude = sqrtf(real * real + imag * imag);
+        float phase = atan2f(imag, real);
         
         ctx->magnitude_spectrum[i] = magnitude;
         ctx->phase_spectrum[i] = phase;
@@ -59,8 +63,8 @@ static void spectral_subtraction(noise_reduction_context_t *ctx, fftwf_complex *
             magnitude *= gain;
         }
         
-        spectrum[i][0] = magnitude * cosf(phase);
-        spectrum[i][1] = magnitude * sinf(phase);
+        ((float*)spectrum)[2*i] = magnitude * cosf(phase);
+        ((float*)spectrum)[2*i + 1] = magnitude * sinf(phase);
     }
 }
 
@@ -199,8 +203,9 @@ int noise_reduction_update_noise_profile(noise_reduction_context_t *ctx, int16_t
         fftwf_execute(ctx->forward_plan);
         
         for (int i = 0; i < ctx->config.frame_size / 2 + 1; i++) {
-            float magnitude = sqrtf(ctx->fft_output[i][0] * ctx->fft_output[i][0] + 
-                                  ctx->fft_output[i][1] * ctx->fft_output[i][1]);
+            float real = ((float*)ctx->fft_output)[2*i];
+            float imag = ((float*)ctx->fft_output)[2*i + 1];
+            float magnitude = sqrtf(real * real + imag * imag);
             ctx->noise_spectrum[i] += magnitude;
         }
         

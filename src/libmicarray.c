@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "libmicarray.h"
 #include "config.h"
 #include "i2s.h"
@@ -12,6 +13,12 @@
 #include <pthread.h>
 #include <signal.h>
 #include <unistd.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 #define LIBMICARRAY_VERSION "1.0.0"
 

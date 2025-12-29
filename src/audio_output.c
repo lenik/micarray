@@ -1,11 +1,18 @@
+#define _GNU_SOURCE
 #include "audio_output.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define _USE_MATH_DEFINES
 #include <math.h>
-#include <alsa/asoundlib.h>
+#include <time.h>
 #include <pthread.h>
 #include <errno.h>
+#include <alsa/asoundlib.h>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 struct audio_output_context {
     audio_output_config_t config;

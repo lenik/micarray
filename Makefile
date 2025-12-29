@@ -68,32 +68,30 @@ debug: all
 # Create example configuration
 config:
 	@echo "Creating example configuration file..."
-	@cat > micarray.conf << 'EOF'
-# libmicarray configuration file
-
-[General]
-log_level = "INFO"
-
-[MicrophoneArray]
-num_microphones = 8
-mic_spacing = 15mm
-i2s_bus = 1
-dma_buffer_size = 1024
-sample_rate = 16000
-
-[NoiseReduction]
-enable = true
-noise_threshold = 0.05
-algorithm = "spectral_subtraction"
-
-[AudioOutput]
-output_device = "default"
-volume = 0.8
-
-[Logging]
-enable_serial_logging = true
-log_file = "/var/log/micarray.log"
-EOF
+	@echo "# libmicarray configuration file" > micarray.conf
+	@echo "" >> micarray.conf
+	@echo "[General]" >> micarray.conf
+	@echo "log_level = \"INFO\"" >> micarray.conf
+	@echo "" >> micarray.conf
+	@echo "[MicrophoneArray]" >> micarray.conf
+	@echo "num_microphones = 8" >> micarray.conf
+	@echo "mic_spacing = 15mm" >> micarray.conf
+	@echo "i2s_bus = 1" >> micarray.conf
+	@echo "dma_buffer_size = 1024" >> micarray.conf
+	@echo "sample_rate = 16000" >> micarray.conf
+	@echo "" >> micarray.conf
+	@echo "[NoiseReduction]" >> micarray.conf
+	@echo "enable = true" >> micarray.conf
+	@echo "noise_threshold = 0.05" >> micarray.conf
+	@echo "algorithm = \"spectral_subtraction\"" >> micarray.conf
+	@echo "" >> micarray.conf
+	@echo "[AudioOutput]" >> micarray.conf
+	@echo "output_device = \"default\"" >> micarray.conf
+	@echo "volume = 0.8" >> micarray.conf
+	@echo "" >> micarray.conf
+	@echo "[Logging]" >> micarray.conf
+	@echo "enable_serial_logging = true" >> micarray.conf
+	@echo "log_file = \"/var/log/micarray.log\"" >> micarray.conf
 	@echo "Configuration file 'micarray.conf' created."
 
 # Test targets
@@ -160,10 +158,10 @@ help:
 	@echo "  uninstall - Remove installed files"
 	@echo "  debug     - Build with debug symbols"
 	@echo "  config    - Create example configuration file"
-	@echo "  test      - Build and run all tests
-  test-build - Build test executables only
-  test-clean - Clean test build files
-  test-<name> - Run specific test (e.g., test-config)"
+	@echo "  test      - Build and run all tests"
+	@echo "  test-build - Build test executables only"
+	@echo "  test-clean - Clean test build files"
+	@echo "  test-<name> - Run specific test (e.g., test-config)"
 	@echo "  package   - Create distribution package"
 	@echo "  help      - Show this help message"
 

@@ -1,8 +1,14 @@
+#define _GNU_SOURCE
 #include "localization.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define _USE_MATH_DEFINES
 #include <math.h>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 #define MAX_DELAY_SAMPLES 1000
 #define DEFAULT_SPEED_OF_SOUND 343.0f

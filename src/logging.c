@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "logging.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +10,8 @@
 #include <termios.h>
 #include <pthread.h>
 #include <errno.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 struct logging_context {
     logging_config_t config;
@@ -56,7 +59,9 @@ static int setup_serial_port(int fd, int baud_rate) {
     tty.c_cflag &= ~CSTOPB;
     tty.c_cflag &= ~CSIZE;
     tty.c_cflag |= CS8;
+#ifdef CRTSCTS
     tty.c_cflag &= ~CRTSCTS;
+#endif
     tty.c_cflag |= CREAD | CLOCAL;
     
     tty.c_lflag &= ~ICANON;
